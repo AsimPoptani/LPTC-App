@@ -14,17 +14,27 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 // Our theme
 import {ThemeProvider} from 'react-native-elements';
 import Theme from './Theme';
-
+import DatabaseContext from './Database';
+import Bootstrap from './Bootstrap';
 // Our Navigation
 import Navigation from './Navigation';
 
 const App: () => React$Node = () => {
+  let database = Bootstrap();
   return (
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
       <SafeAreaProvider>
         <ThemeProvider theme={Theme}>
-          <Navigation />
+          <DatabaseContext.Provider
+            value={{
+              database: database,
+              modifyDatabase: () => {
+                alert('Hello');
+              },
+            }}>
+            <Navigation />
+          </DatabaseContext.Provider>
         </ThemeProvider>
       </SafeAreaProvider>
     </>
