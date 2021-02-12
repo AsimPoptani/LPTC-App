@@ -14,7 +14,6 @@ let database = {
 
 const DatabaseContext = React.createContext({
     database:database,
-    modifyDatabase: database => {}
 })
 
 
