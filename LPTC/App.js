@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 
 import {StatusBar} from 'react-native';
 // So we can ise react native elements
@@ -14,13 +14,14 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 // Our theme
 import {ThemeProvider} from 'react-native-elements';
 import Theme from './Theme';
-import DatabaseContext from './Database';
+import {DatabaseContext} from './Database';
 import Bootstrap from './Bootstrap';
 // Our Navigation
 import Navigation from './Navigation';
 
 const App: () => React$Node = () => {
-  let database = Bootstrap();
+  const [database,setDatabase] = useState(Bootstrap())
+  const [user,setUser]= useState()
   return (
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
@@ -29,9 +30,9 @@ const App: () => React$Node = () => {
           <DatabaseContext.Provider
             value={{
               database: database,
-              modifyDatabase: () => {
-                alert('Hello');
-              },
+              setDatabase:setDatabase,
+              user: user,
+              setUser:setUser
             }}>
             <Navigation />
           </DatabaseContext.Provider>
