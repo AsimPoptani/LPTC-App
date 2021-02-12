@@ -2,9 +2,10 @@ import {v4} from 'uuid';
 export class Recommendation {
   text: string;
   expressionId: string;
-  id: any;
-
-  constructor(text: string, expressionId: string, id = v4()) {
+  id: string;
+  subCategoryId: string;
+  constructor(text:string, expressionId:string,subCategoryId:string, id = v4()) {
+    this.subCategoryId=subCategoryId;
     this.text = text;
     this.expressionId = expressionId;
     this.id = id;
