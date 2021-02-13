@@ -18,6 +18,7 @@ let bootstrap = () => {
     expressions: [],
     benefits: [],
     recommendations: [],
+    subCategories: [],
   };
 
   // Create two catagories
@@ -27,6 +28,9 @@ let bootstrap = () => {
   let subCat11 = new SubCategory('Blue Badge', cat1.id);
   let subCat21 = new SubCategory('Dyslexia', cat2.id);
   let subCat22 = new SubCategory('ADD', cat2.id);
+
+  database.categories.push(cat1, cat2);
+  database.subCategories.push(subCat1, subCat11, subCat21, subCat22);
   // What is the best thing you put on pizza
   // Ham
   // Cheese
