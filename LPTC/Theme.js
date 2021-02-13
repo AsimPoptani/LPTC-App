@@ -14,3 +14,4 @@ export default theme = {
     activeOpacity: 0.7,
   },
 };
+
