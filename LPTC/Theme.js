@@ -3,9 +3,22 @@ export default theme = {
   colors: {
     // primary: 'red',
   },
-  Button: {
-    color: 'black',
-  },
+  // Button: {
+  //   disabled: false,
+  //   titleStyle: {
+  //     color: 'black',
+  //     fontSize: 15,
+  //   },
+  //   buttonStyle: {
+  //     borderColor: 'black',
+  //   },
+  //   containerStyle: {
+  //     marginVertical: 2,
+  //   },
+  //   // border: 'black',
+  //   // color: 'black',
+  //   type: 'outline',
+  // },
   Image: {
     resizeMode: 'center',
   },
@@ -14,4 +27,3 @@ export default theme = {
     activeOpacity: 0.7,
   },
 };
-

@@ -1,16 +1,15 @@
 import React from 'react';
 // React navigation
-import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer, StackActions} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 // Screens
 import Splashscreen from './screens/Splashscreen';
-import Profile from './screens/Profile'
-import SubCategoryScreen from './screens/SubCategoryScreen'
-import MenuScreen from './screens/MenuScreen'
-import SettingScreen from './screens/SettingScreen'
-import SetupScreen from './screens/SetupScreen'
-import WelcomeScreen from './screens/WelcomeScreen'
-
+import Profile from './screens/Profile';
+import SubCategoryScreen from './screens/SubCategoryScreen';
+import MenuScreen from './screens/MenuScreen';
+import SettingScreen from './screens/SettingScreen';
+import SetupScreen from './screens/SetupScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 
 let Navigation = () => {
   // Navigators
@@ -29,16 +28,36 @@ let Navigation = () => {
   };
   return (
     <NavigationContainer initialRouteName="Splashscreen">
-      <stack.Navigator screenOptions={{
-        transitionSpec: {
-          open: config,
-          close: config,
-        }
-      }}>
-        <stack.Screen name="Splashscreen" options={{ headerShown: false }} component={Splashscreen} />
-        <stack.Screen name="Profile" options={{ headerShown: false }} component={Profile} />
+      <stack.Navigator
+        screenOptions={{
+          transitionSpec: {
+            open: config,
+            close: config,
+          },
+        }}>
+        <stack.Screen
+          name="Splashscreen"
+          options={{headerShown: false}}
+          component={Splashscreen}
+        />
+        {/* <stack.Screen name="Profile" options={{ headerShown: false }} component={Profile} /> */}
+        <stack.Screen
+          name="MenuScreen"
+          options={{headerShown: false}}
+          component={MenuScreen}
+        />
+        <stack.Screen
+          name="SetupScreen"
+          options={{headerShown: false}}
+          component={SetupScreen}
+        />
+                <stack.Screen
+          name="SubCategoryScreen"
+          options={{headerShown: false}}
+          component={SubCategoryScreen}
+        />
       </stack.Navigator>
-    </NavigationContainer >
+    </NavigationContainer>
   );
 };
 

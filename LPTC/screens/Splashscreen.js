@@ -1,55 +1,45 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect, useContext } from 'react';
-import { SafeAreaView, StyleSheet, ActivityIndicator } from 'react-native';
-import { Text, Image } from 'react-native-elements';
-import { DatabaseContext } from '../Database'
-import moment from 'moment'
-import MMKVStorage from "react-native-mmkv-storage";
-
+import {useNavigation} from '@react-navigation/native';
+import React, {useState, useEffect, useContext} from 'react';
+import {SafeAreaView, StyleSheet, ActivityIndicator} from 'react-native';
+import {Text, Image} from 'react-native-elements';
+import {DatabaseContext} from '../DatabaseContext';
+import moment from 'moment';
+import MMKVStorage from 'react-native-mmkv-storage';
 
 export default function Splashscreen() {
-  const databaseContext = useContext(DatabaseContext)
+  const databaseContext = useContext(DatabaseContext);
   const navigation = useNavigation();
 
   useEffect(() => {
     // Transition time
-    let transitionTime = 5000;
-    // Time now
-    let timeNow = moment.now()
-
-
-    // get user and database
-    // databaseContext.retrieve().then(
-    //   () => {
-    //     alert("We got data back")
-    //   },
-    //   (error) => {
-
-    //   }
-    // )
-    // if we have an error then we assume that there is no data
-    // databaseContext.setUser({ "name": "Asim" });
-    // alert("added")
-    // databaseContext.save().then(
-    //   () => {
-    //     alert("saved")
-    //   },
-    //   (error) => {
-    //     alert("Error " + error)
-    //   }
-    // )
-    databaseContext.retrieve().then(
-      () => {
-        alert("success")
-        alert(databaseContext.user.name)
-      },
-      () => {
-        alert("error")
-      }
-    )
+    let transitionTime = 1000;
     setTimeout(() => {
-      navigation.navigate('Profile');
-    }, 5000);
+      navigation.navigate('MenuScreen');
+    }, transitionTime);
+    // databaseContext.retrieve().then(
+    //   // If the database exists then we go to the MenuScreen
+    //   () => {
+    //     console.log(databaseContext);
+
+    //     if (databaseContext.user) {
+    //       setTimeout(() => {
+    //         navigation.navigate('MenuScreen');
+    //       }, transitionTime);
+    //     } else {
+    //       // TODO setup
+    //       // Go to SetupScreen screen
+    //       setTimeout(() => {
+    //         navigation.navigate('SetupScreen');
+    //       }, transitionTime);
+    //     }
+    //   },
+    //   () => {
+    //     // Go to error screen
+    //     setTimeout(() => {
+    //       navigation.navigate('SetupScreen');
+    //     }, transitionTime);
+    //   },
+    // );
   }, []);
   return (
     <SafeAreaView style={stylesheet.outer}>

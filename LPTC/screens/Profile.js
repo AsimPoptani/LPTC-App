@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, Text} from 'react-native';
 import {Avatar, ListItem} from 'react-native-elements';
-import {DatabaseContext} from '../Database';
+import {DatabaseContext} from '../DatabaseContext';
 
 function Profile(props) {
   return (
