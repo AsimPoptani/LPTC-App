@@ -1,8 +1,8 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState, useEffect, useContext} from 'react';
-import {SafeAreaView, StyleSheet, ActivityIndicator} from 'react-native';
-import {Text, Image} from 'react-native-elements';
-import {DatabaseContext} from '../DatabaseContext';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect, useContext } from 'react';
+import { SafeAreaView, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, Image } from 'react-native-elements';
+import { DatabaseContext } from '../DatabaseContext';
 import moment from 'moment';
 import MMKVStorage from 'react-native-mmkv-storage';
 
@@ -12,7 +12,7 @@ export default function Splashscreen() {
 
   useEffect(() => {
     // Transition time
-    let transitionTime = 1000;
+    let transitionTime = 3000;
     setTimeout(() => {
       navigation.navigate('MenuScreen');
     }, transitionTime);
@@ -45,9 +45,14 @@ export default function Splashscreen() {
     <SafeAreaView style={stylesheet.outer}>
       {/* <Image source={require('./images/logo.jpg')} style={stylesheet.image} />
        */}
-      <Text h1>LPTC</Text>
-      <ActivityIndicator size={'large'} color={'black'} />
-      <Text>Loading ...</Text>
+      <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}>
+        <Text h1>DBMA</Text>
+        <Text h4>Disability Benefits Mobile Application</Text>
+      </View>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size={'large'} color={'black'} />
+        <Text>Loading ...</Text>
+      </View>
     </SafeAreaView>
   );
 }
