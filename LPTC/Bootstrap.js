@@ -1,12 +1,12 @@
-import {Recommendation} from './models/Recommendation';
-import {Benefit} from './models/Benefit';
-import {Answer} from './models/Answer';
-import {Expression} from './models/Expression';
-import {Question} from './models/Question';
-import {ExpressionExpression} from './models/ExpressionExpression';
-import {AnswerExpression} from './models/AnswerExpression';
-import {Category} from './models/Category';
-import {SubCategory} from './models/SubCategory';
+import { Recommendation } from './models/Recommendation';
+import { Benefit } from './models/Benefit';
+import { Answer } from './models/Answer';
+import { Expression } from './models/Expression';
+import { Question } from './models/Question';
+import { ExpressionExpression } from './models/ExpressionExpression';
+import { AnswerExpression } from './models/AnswerExpression';
+import { Category } from './models/Category';
+import { SubCategory } from './models/SubCategory';
 
 let bootstrap = () => {
   let database = {
@@ -24,10 +24,10 @@ let bootstrap = () => {
   // Create two catagories
   let cat1 = new Category('Physical Health');
   let cat2 = new Category('Mental Health');
-  let subCat1 = new SubCategory('PIP', cat1.id);
-  let subCat11 = new SubCategory('Blue Badge', cat1.id);
-  let subCat21 = new SubCategory('Dyslexia', cat2.id);
-  let subCat22 = new SubCategory('ADD', cat2.id);
+  let subCat1 = new SubCategory('Wheel chair user', cat1.id);
+  let subCat11 = new SubCategory('General Disability', cat1.id);
+  let subCat21 = new SubCategory('Learning Disabilities ', cat2.id);
+  let subCat22 = new SubCategory('Psychiatric Health', cat2.id);
 
   database.categories.push(cat1, cat2);
   database.subCategories.push(subCat1, subCat11, subCat21, subCat22);
