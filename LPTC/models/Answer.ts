@@ -4,8 +4,10 @@ export class Answer {
   questionId: string;
   state:boolean;
   id:string;
-  constructor(text:string,questionId:string,state=false, id = v4()) {
+  answered:boolean;
+  constructor(text:string,questionId:string,state=false,answered:false, id = v4()) {
     this.state= state;
+    this.answered =answered;
     this.questionId= questionId;
     this.text = text;
     this.id = id;
