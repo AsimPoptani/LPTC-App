@@ -1,7 +1,7 @@
 import React from 'react';
 // React navigation
-import {NavigationContainer, StackActions} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 // Screens
 import Splashscreen from './screens/Splashscreen';
 import Profile from './screens/Profile';
@@ -37,23 +37,23 @@ let Navigation = () => {
         }}>
         <stack.Screen
           name="Splashscreen"
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
           component={Splashscreen}
         />
         {/* <stack.Screen name="Profile" options={{ headerShown: false }} component={Profile} /> */}
         <stack.Screen
           name="MenuScreen"
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
           component={MenuScreen}
         />
         <stack.Screen
           name="SetupScreen"
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
           component={SetupScreen}
         />
-                <stack.Screen
+        <stack.Screen
           name="SubCategoryScreen"
-          options={{headerShown: false}}
+          options={{ headerShown: true }}
           component={SubCategoryScreen}
         />
       </stack.Navigator>
