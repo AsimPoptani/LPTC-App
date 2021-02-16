@@ -1,10 +1,14 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-
-export default function SettingScreen() {
+import { SafeAreaView } from 'react-native'
+import {Text, Card} from 'react-native-elements'
+export default function SettingScreen({navigation}) {
+    navigation.setOptions({title:"Settings"})
     return (
-        <View>
-            <Text></Text>
-        </View>
+        <SafeAreaView>
+            <Text h2>Settings</Text>
+            <Card >
+                
+                </Card>
+        </SafeAreaView>
     )
 }
