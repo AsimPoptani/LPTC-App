@@ -4,7 +4,7 @@ import { SafeAreaView, View, StyleSheet, ActivityIndicator } from 'react-native'
 import { Text, Image } from 'react-native-elements';
 import { DatabaseContext } from '../DatabaseContext';
 import moment from 'moment';
-import MMKVStorage from 'react-native-mmkv-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Splashscreen() {
   const databaseContext = useContext(DatabaseContext);
@@ -16,35 +16,29 @@ export default function Splashscreen() {
     setTimeout(() => {
       navigation.navigate('MenuScreen');
     }, transitionTime);
-    // databaseContext.retrieve().then(
-    //   // If the database exists then we go to the MenuScreen
-    //   () => {
-    //     console.log(databaseContext);
 
-    //     if (databaseContext.user) {
-    //       setTimeout(() => {
-    //         navigation.navigate('MenuScreen');
-    //       }, transitionTime);
-    //     } else {
-    //       // TODO setup
-    //       // Go to SetupScreen screen
-    //       setTimeout(() => {
-    //         navigation.navigate('SetupScreen');
-    //       }, transitionTime);
-    //     }
-    //   },
-    //   () => {
-    //     // Go to error screen
-    //     setTimeout(() => {
-    //       navigation.navigate('SetupScreen');
-    //     }, transitionTime);
-    //   },
-    // );
+    databaseContext.retrieve().then(
+      () => {
+        // If there is a user go to the main screen otherwise go to setup
+        if (databaseContext.user) {
+          setTimeout(() => {
+            navigation.navigate('MenuScreen');
+          }, transitionTime);
+        }
+        else {
+          setTimeout(() => {
+            navigation.navigate('SetupScreen');
+          }, transitionTime);
+        }
+      }
+    ).catch((e) => {
+      // todo go to error page
+      alert("There has been an error in splashscreen", e)
+    })
+
   }, []);
   return (
     <SafeAreaView style={stylesheet.outer}>
-      {/* <Image source={require('./images/logo.jpg')} style={stylesheet.image} />
-       */}
       <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}>
         <Text h1>DBMA</Text>
         <Text h4>Disability Benefits Mobile Application</Text>

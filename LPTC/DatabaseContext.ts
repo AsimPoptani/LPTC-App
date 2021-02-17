@@ -16,11 +16,9 @@ const DatabaseContext = React.createContext({
   setDatabase: () => {},
   user: {},
   setUser: () => {},
-  save: () => {},
-  retrieve: () => {},
-  clear: () => {},
-  settings: {},
-  setSettings: () => {},
+  save: async () => {},
+  retrieve: async () => {},
+  clear: async () => {},
 });
 
 export {DatabaseContext};
