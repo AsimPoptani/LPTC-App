@@ -1,10 +1,12 @@
-import {v4} from 'uuid';
+import { v4 } from 'uuid';
 export class Question {
   text: string;
   expressionId: string;
   id: string;
   answered: boolean;
-  constructor(text:string, expressionId=null,answered=false, id = v4()) {
+  categoryId: string;
+  constructor(text: string, categoryId: string, expressionId = null, answered = false, id = v4()) {
+    this.categoryId = categoryId
     this.text = text;
     this.expressionId = expressionId;
     this.id = id;

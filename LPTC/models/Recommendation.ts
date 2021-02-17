@@ -1,10 +1,13 @@
+import moment from 'moment';
 import {v4} from 'uuid';
 export class Recommendation {
   text: string;
   expressionId: string;
   id: string;
   subCategoryId: string;
-  constructor(text:string, expressionId:string,subCategoryId:string, id = v4()) {
+  lastUpdated: Date;
+  constructor(text:string, expressionId:string,subCategoryId:string, id = v4(),lastUpdated = moment().toDate()) {
+    this.lastUpdated=lastUpdated;
     this.subCategoryId=subCategoryId;
     this.text = text;
     this.expressionId = expressionId;
