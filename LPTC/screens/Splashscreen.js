@@ -13,14 +13,16 @@ export default function Splashscreen() {
   useEffect(() => {
     // Transition time
     let transitionTime = 3000;
-    setTimeout(() => {
-      navigation.navigate('MenuScreen');
-    }, transitionTime);
+    // setTimeout(() => {
+    //   navigation.navigate('MenuScreen');
+    // }, transitionTime);
 
     databaseContext.retrieve().then(
       () => {
+        console.warn("Name is " + databaseContext.user)
         // If there is a user go to the main screen otherwise go to setup
-        if (databaseContext.user) {
+        if (databaseContext.user && databaseContext.user.name) {
+
           setTimeout(() => {
             navigation.navigate('MenuScreen');
           }, transitionTime);
@@ -33,7 +35,8 @@ export default function Splashscreen() {
       }
     ).catch((e) => {
       // todo go to error page
-      alert("There has been an error in splashscreen", e)
+      alert("There has been an error in splashscreen" + e)
+
     })
 
   }, []);

@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
-import {DatabaseContext} from '../DatabaseContext';
-import {View, Text} from 'react-native';
-import {Button} from 'react-native-elements';
+import React, { useContext } from 'react';
+import { DatabaseContext } from '../DatabaseContext';
+import { View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 import Bootstrap from '../Bootstrap';
 export default function SetupScreen() {
   const databaseContext = useContext(DatabaseContext);
@@ -9,14 +9,15 @@ export default function SetupScreen() {
   return (
     <View>
       {/* Temp */}
-      {/* <Button
+      <Button
         // disabled={false}
         title={'Set me up'}
         onPress={() => {
           databaseContext.setDatabase(Bootstrap());
+          databaseContext.setUser({ name: "asim" })
           databaseContext.save();
           alert('Saved');
-        }}></Button> */}
+        }}></Button>
       <Text></Text>
     </View>
   );

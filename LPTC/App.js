@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { StatusBar } from 'react-native';
 // So we can ise react native elements
@@ -19,9 +19,10 @@ import Bootstrap from './Bootstrap';
 // Our Navigation
 import Navigation from './Navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import GlobalState from './GlobalState'
 const App: () => React$Node = () => {
-  const [database, setDatabase] = useState(Bootstrap());
-  const [user, setUser] = useState();
+  let [database, setDatabase] = useState({});
+  let [user, setUser] = useState({});
 
   const DATABASE_TOKEN = "@LPTC_database"
   const USER_TOKEN = "@LPTC_user"
@@ -33,6 +34,7 @@ const App: () => React$Node = () => {
         [DATABASE_TOKEN, parseToJson(database)],
         [USER_TOKEN, parseToJson(user)]
       ]
+      console.error(data)
       await AsyncStorage.multiSet(data)
     } catch (e) {
       alert("cannot save " + e)
@@ -45,13 +47,20 @@ const App: () => React$Node = () => {
   const parseToJson = (object) => {
     return JSON.stringify(object)
   }
+
   // Retrieve data
   async function retrieve() {
-    try {
-      let values = await AsyncStorage.multiGet([DATABASE_TOKEN, USER_TOKEN])
-      setDatabase(parseJson(values[DATABASE_TOKEN]));
-      setUser(parseJson(values[USER_TOKEN]));
 
+    try {
+      let databaseToken = await AsyncStorage.getItem(DATABASE_TOKEN)
+      let userToken = await AsyncStorage.getItem(USER_TOKEN)
+      setDatabase(parseJson(databaseToken));
+      setUser(parseJson(userToken));
+
+
+
+      console.warn(userToken + " " + user.name + " " + parseJson(userToken).name)
+      console.warn(database)
     }
     catch (e) {
       //todo navigate to error screen
@@ -74,7 +83,7 @@ const App: () => React$Node = () => {
       <StatusBar barStyle="dark-content" hidden={true} />
       <SafeAreaProvider>
         <ThemeProvider theme={Theme}>
-          <DatabaseContext.Provider
+          {/* <DatabaseContext.Provider
             value={{
               database: database,
               setDatabase: setDatabase,
@@ -83,9 +92,11 @@ const App: () => React$Node = () => {
               save: save,
               retrieve: retrieve,
               clear: clear,
-            }}>
+            }}> */}
+          <GlobalState>
             <Navigation />
-          </DatabaseContext.Provider>
+          </GlobalState>
+          {/* </DatabaseContext.Provider> */}
         </ThemeProvider>
       </SafeAreaProvider>
     </>
