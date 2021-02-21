@@ -177,7 +177,28 @@ function findAllUnansweredQuestionsExpressionsFulfilled(
   return questionsExpressionsFulfilled;
 }
 
+function findAllBenefitsBySubCategoryId(
+  database: Dictionary<any>,
+  subCategoryId: string
+): Array<Benefit> {
+  let benefits: Array<Benefit> = database.benefits;
+  console.log(benefits)
+  console.log(subCategoryId)
+  return benefits.filter((benefit) => benefit.subCategoryId == subCategoryId)
+}
+
+function findAllRecommendationsBySubCategoryId(
+  database: Dictionary<any>,
+  subCategoryId: string
+): Array<Benefit> {
+  let recommendations: Array<Recommendation> = database.recommendations;
+  // console.log(recommendations)
+  return recommendations.filter((recommendation) => recommendation.subCategoryId == subCategoryId)
+}
+
 export {
+  findAllBenefitsBySubCategoryId,
+  findAllRecommendationsBySubCategoryId,
   findCategoryById,
   findAllSubCategoriesByCategoryId,
   findAllUnansweredQuestions,

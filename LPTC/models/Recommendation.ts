@@ -6,7 +6,7 @@ export class Recommendation {
   id: string;
   subCategoryId: string;
   lastUpdated: Date;
-  constructor(text:string, expressionId:string,subCategoryId:string, id = v4(),lastUpdated = moment().toDate()) {
+  constructor(text:string,subCategoryId:string, expressionId:string, id = v4(),lastUpdated = moment().toDate()) {
     this.lastUpdated=lastUpdated;
     this.subCategoryId=subCategoryId;
     this.text = text;

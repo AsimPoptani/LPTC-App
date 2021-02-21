@@ -86,9 +86,8 @@ let bootstrap = () => {
   let motorExpression = new AnswerExpression(motorWheelchair.id, wheelchairExpression.id);
 
   let pip = new Benefit(
-    (text = 'PIP'),
-    (subCategoryId = subCat1),
-    (expressionId= wheelchairExpression)
+    'PIP',subCat1.id,wheelchairExpression.id
+
   );
 
   // add to database
@@ -100,9 +99,9 @@ let bootstrap = () => {
   let cheeseSaltExpression = new Expression();
   afraidOfWalkingExpression = new AnswerExpression(afraidWalking.id, cheeseSaltExpression.id);
   let saltExpression = new AnswerExpression(noWheelchair.id, cheeseSaltExpression.id);
-  let cheeseSaltBenefit = new Benefit(
-    (text = 'Motor car'),
-    (subCategoryId = subCat21),
+  let cheeseSaltBenefit = new Recommendation(
+    'Motor car',
+    subCat21.id,
   );
 
   // add to database

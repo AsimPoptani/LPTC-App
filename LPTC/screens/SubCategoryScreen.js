@@ -37,7 +37,9 @@ export default function SubCategoryScreen({ route, navigation }) {
         <Button title={"Take the quiz"} />
         <Text h3>Bank of knowledge</Text>
         <Text>Or Have a look at some of the categories under {category.text}, click one to find out more.</Text>
-        <FlatList data={SubCategories} keyExtractor={(item) => { return item.id }} renderItem={({ item }) => <Button title={item.text}></Button>} />
+        <FlatList data={SubCategories} keyExtractor={(item) => { return item.id }} renderItem={({ item }) => <Button onPress={()=>{
+          navigation.navigate("MoreInfoScreen",{id:item.id})
+        }} title={item.text}></Button>} />
       </SafeAreaView>
     );
   }

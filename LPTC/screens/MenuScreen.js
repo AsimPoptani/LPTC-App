@@ -16,10 +16,10 @@ export default function MenuScreen() {
   const [dataState, dataActions] = useData();
   return (
     <SafeAreaView style={{ margin: 15 }}>
-      <Text h1>Welcome back {dataState.user.name}</Text>
-      <Text h1>Main Menu</Text>
+      <Text h2 >Welcome back {dataState.user.name}</Text>
+      <Text h2>Main Menu</Text>
       <Text>Select a category below to get started ... </Text>
-      <Text h2>Catagories</Text>
+      <Text h3>Catagories</Text>
       <View style={{ justifyContent: 'center' }}>
         <FlatList
           data={dataState.database.categories}

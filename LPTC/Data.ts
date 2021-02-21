@@ -21,7 +21,7 @@ const parseToJson = (object) => {
 };
 // initial state
 const initialState = {
-  database: {},
+  database: database,
   user: {},
   loading: false,
   error: false,
