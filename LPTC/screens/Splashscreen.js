@@ -1,52 +1,60 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState, useEffect, useContext} from 'react';
-import {SafeAreaView, View, StyleSheet, ActivityIndicator} from 'react-native';
-import {Text, Image} from 'react-native-elements';
-import {DatabaseContext} from '../DatabaseContext';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect, useContext } from 'react';
+import { SafeAreaView, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, Image } from 'react-native-elements';
+// import {DatabaseContext} from '../DatabaseContext';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createStore, createSubscriber, createHook } from 'react-sweet-state';
+import { useData } from '../Data'
 
 
 export default function Splashscreen() {
-  let databaseContext = useContext(DatabaseContext);
+  // let databaseContext = useContext(DatabaseContext);
   const navigation = useNavigation();
+  const [dataState, dataActions] = useData();
+  const [loading, setLoading] = useState();
+
+  let transitionTime = 3000;
+  useEffect(() => {
+
+    (async () => {
+      setLoading(true)
+      await dataActions.retrieve()
+      setLoading(false)
+
+    })();
+  }, [dataActions, setLoading])
 
   useEffect(() => {
-    // Transition time
-    let transitionTime = 3000;
-    // setTimeout(() => {
-    //   navigation.navigate('MenuScreen');
-    // }, transitionTime);
+    if (loading == false) {
+      if (dataState.user !== {} && dataState.database !== {}) {
+        setTimeout(() => {
+          navigation.navigate('MenuScreen');
+        }, transitionTime);
 
-    databaseContext
-      .retrieve()
-      .then(() => {
-        // databaseContext = useContext(DatabaseContext);
-        console.warn('Name is ' + databaseContext.user.name);
-        // If there is a user go to the main screen otherwise go to setup
-        if (databaseContext.user && databaseContext.user.name) {
-          setTimeout(() => {
-            navigation.navigate('MenuScreen');
-          }, transitionTime);
-        } else {
-          setTimeout(() => {
-            navigation.navigate('SetupScreen');
-          }, transitionTime);
-        }
-      })
-      .catch((e) => {
-        // todo go to error page
-        alert('There has been an error in splashscreen' + e);
-      });
-  }, []);
+      }
+      else {
+        setTimeout(() => {
+          navigation.navigate('SetupScreen');
+        }, transitionTime);
+      }
+    }
+  }, [loading, dataState.user, dataState.database])
+
+  // console.log(dataState.loading)
+  // useEffect(() => {
+  // Transition time
+  // setTimeout(() => {
+  //   navigation.navigate('MenuScreen');
+  // }, transitionTime);
+
   return (
     <SafeAreaView style={stylesheet.outer}>
-      <View style={{flex: 3, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}>
         <Text h1>DBMA</Text>
         <Text h4>Disability Benefits Mobile Application</Text>
       </View>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size={'large'} color={'black'} />
         <Text>Loading ...</Text>
       </View>

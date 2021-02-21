@@ -1,25 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FlatList, SafeAreaView } from 'react-native';
 import { Text, Button } from 'react-native-elements';
-import { DatabaseContext } from '../DatabaseContext';
-import { findCategoryById, findAllSubCategoriesByCategory } from '../Logic';
+import { useData } from '../Data';
+import { findCategoryById, findAllSubCategoriesByCategoryId } from '../Logic';
 export default function SubCategoryScreen({ route, navigation }) {
-  const categoryId = route.params.id;
-  const databaseContext = useContext(DatabaseContext);
-  const category = findCategoryById(databaseContext.database, categoryId);
-  const SubCategories = findAllSubCategoriesByCategory(
-    databaseContext.database,
-    categoryId,
-  );
-  navigation.setOptions({ title: category.text })
-  return (
-    <SafeAreaView style={{ margin: 15 }}>
-      <Text h2>{category.text}</Text>
-      <Text>Take the quiz to get more accurate idea of what benefits you are entitled too...</Text>
-      <Button title={"Take the quiz"} />
-      <Text h3>Bank of knowledge</Text>
-      <Text>Or Have a look at some of the categories under {category.text}, click one to find out more.</Text>
-      <FlatList data={SubCategories} renderItem={({ item }) => <Button title={item.text}></Button>} />
-    </SafeAreaView>
-  );
+  const [dataState, dataActions] = useData();
+  const [SubCategories, setSubCategories] = useState()
+  const [category, setCategory] = useState()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    const categoryId = route.params.id;
+    setCategory(findCategoryById(dataState.database, categoryId));
+    setSubCategories(findAllSubCategoriesByCategoryId(
+      dataState.database,
+      categoryId,
+    ));
+
+    setLoading(false)
+
+  }, [route.params.id, dataState.database, setCategory, setSubCategories, setLoading])
+
+  if (loading) {
+    return (
+      <SafeAreaView style={{ margin: 15 }}>
+        <Text>Loading</Text>
+      </SafeAreaView>
+    )
+  } else {
+    navigation.setOptions({ title: category.text })
+    return (
+      <SafeAreaView style={{ margin: 15 }}>
+        <Text h2>{category.text}</Text>
+        <Text>Take the quiz to get more accurate idea of what benefits you are entitled too...</Text>
+        <Button title={"Take the quiz"} />
+        <Text h3>Bank of knowledge</Text>
+        <Text>Or Have a look at some of the categories under {category.text}, click one to find out more.</Text>
+        <FlatList data={SubCategories} keyExtractor={(item) => { return item.id }} renderItem={({ item }) => <Button title={item.text}></Button>} />
+      </SafeAreaView>
+    );
+  }
 }
