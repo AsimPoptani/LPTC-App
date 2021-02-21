@@ -5,10 +5,12 @@ export class Question {
   id: string;
   answered: boolean;
   categoryId: string;
-  constructor(text: string, categoryId: string, expressionId = null, answered = false, id = v4()) {
+  skipped: boolean;
+  constructor(text: string, categoryId: string, expressionId = null, answered = false,skipped=false, id = v4()) {
     this.categoryId = categoryId
     this.text = text;
     this.expressionId = expressionId;
+    this.skipped=skipped;
     this.id = id;
     this.answered = answered;
   }

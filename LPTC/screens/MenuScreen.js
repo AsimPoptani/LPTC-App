@@ -1,5 +1,6 @@
-import React, {useContext} from 'react';
-import {DatabaseContext} from '../DatabaseContext';
+import React, { useContext } from 'react';
+// import { DatabaseContext } from '../Data';
+import { useData } from '../Data'
 import {
   SafeAreaView,
   TouchableHighlight,
@@ -7,28 +8,28 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import {Text, Button} from 'react-native-elements';
-import {useNavigation} from '@react-navigation/native';
+import { Text, Button } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 export default function MenuScreen() {
-  const databaseContext = useContext(DatabaseContext);
   const navigation = useNavigation();
-  //   navigation.navigate('SubCategoryScreen');
+  const [dataState, dataActions] = useData();
   return (
-    <SafeAreaView style={{margin: 15}}>
-      <Text h1>Main Menu</Text>
+    <SafeAreaView style={{ margin: 15 }}>
+      <Text h2 >Welcome back {dataState.user.name}</Text>
+      <Text h2>Main Menu</Text>
       <Text>Select a category below to get started ... </Text>
-      <Text h2>Catagories</Text>
-      <View style={{justifyContent: 'center'}}>
+      <Text h3>Catagories</Text>
+      <View style={{ justifyContent: 'center' }}>
         <FlatList
-          data={databaseContext.database.categories}
-          renderItem={({item}) => {
-            // console.log(item);
+          data={dataState.database.categories}
+          renderItem={({ item }) => {
+
             return (
               <Button
                 title={item.text}
                 onPress={() => {
-                  navigation.navigate('SubCategoryScreen',{id:item.id});
+                  navigation.navigate('SubCategoryScreen', { id: item.id });
                 }}
               />
             );

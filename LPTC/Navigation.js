@@ -10,6 +10,7 @@ import MenuScreen from './screens/MenuScreen';
 import SettingScreen from './screens/SettingScreen';
 import SetupScreen from './screens/SetupScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
+import MoreInfoScreen from './screens/MoreInfoScreen'
 
 let Navigation = () => {
   // Navigators
@@ -55,6 +56,11 @@ let Navigation = () => {
           name="SubCategoryScreen"
           options={{ headerShown: true }}
           component={SubCategoryScreen}
+        />
+        <stack.Screen
+        name="MoreInfoScreen"
+        options={{ headerShown: true }}
+          component={MoreInfoScreen}
         />
       </stack.Navigator>
     </NavigationContainer>

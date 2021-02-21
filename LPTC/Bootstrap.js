@@ -36,75 +36,77 @@ let bootstrap = () => {
   // Cheese
   // Pineapple
   // Bread
-  let question = new Question('What is the best thing you put on pizza?');
+  let question = new Question('Do you need help walking?', cat1.id);
   // answers
-  let ham = new Answer('Ham', question.id);
-  let cheese = new Answer('Cheese', question.id);
-  let pineapple = new Answer('Pineapple', question.id);
-  let bread = new Answer('Bread', question.id);
+  let carerHelp = new Answer('I need a carer', question.id);
+  let afraidWalking = new Answer('I am afraid of walking', question.id);
+  let outOfBreath = new Answer('I get out of breath quickly', question.id);
+  let fine = new Answer('I am fine walking', question.id);
   // add to database
-  database.answers.push(ham, cheese, pineapple, bread);
+  database.answers.push(carerHelp, afraidWalking, outOfBreath, fine);
 
   // Do ask question if we choose ham,cheese or pineapple
-  let breadException = new Expression(true);
+  let walkingHelpExpression = new Expression(true);
   // add to database
-  database.expressions.push(breadException);
+  database.expressions.push(walkingHelpExpression);
 
   // Add answerExpressions
-  let hamExpression = new AnswerExpression(ham.id, breadException.id);
-  let cheeseExpression = new AnswerExpression(cheese.id, breadException.id);
-  let pineappleExpression = new AnswerExpression(
-    pineapple.id,
-    breadException.id,
+  let carerHelpExpression = new AnswerExpression(carerHelp.id, walkingHelpExpression.id);
+  let afraidOfWalkingExpression = new AnswerExpression(afraidWalking.id, walkingHelpExpression.id);
+  let outOfBreathExpression = new AnswerExpression(
+    outOfBreath.id,
+    walkingHelpExpression.id,
   );
   // add to database
   database.answerExpressions.push(
-    hamExpression,
-    cheeseExpression,
-    pineappleExpression,
+    carerHelpExpression,
+    afraidOfWalkingExpression,
+    outOfBreathExpression,
   );
 
   // What is the worst thing you put on pizza
-  let worstPizza = new Question(
-    'What is the worst thing you put on pizza?',
-    breadException,
+  let wheelchair = new Question(
+    'Do you need a wheelchair?',
+    cat1.id,
+    walkingHelpExpression.id,
   );
   // Tea
   // Vinegar
   // Salt
-  let tea = new Answer('Tea', worstPizza.id);
-  let vinegar = new Answer('Vinegar', worstPizza.id);
-  let salt = new Answer('Salt', worstPizza.id);
+  let motorWheelchair = new Answer('I need a motorized wheelchair', wheelchair.id);
+  let manual = new Answer('I need a manual wheelchair', wheelchair.id);
+  let noWheelchair = new Answer('I don\'t need a wheelchair', wheelchair.id);
   // add to Database
-  database.answers.push(tea, vinegar, salt);
-  database.questions.push(worstPizza);
+  database.answers.push(motorWheelchair, manual, noWheelchair);
+  database.questions.push(wheelchair);
 
   // Ham Tea = Recommendation See a therapist
-  let hamTeaExpression = new Expression(true);
-  hamExpression = new AnswerExpression(ham.id, hamTeaExpression.id);
-  let teaExpression = new AnswerExpression(ham.id, hamTeaExpression.id);
-  let hamTeaRecommendation = new Recommendation(
-    (text = 'Please contact your therapist!'),
-    (subCategoryId = subCat1),
+  let wheelchairExpression = new Expression(false);
+  let manualExpression = new AnswerExpression(manual.id, wheelchairExpression.id);
+  let motorExpression = new AnswerExpression(motorWheelchair.id, wheelchairExpression.id);
+
+  let pip = new Benefit(
+    'PIP',subCat1.id,wheelchairExpression.id
+
   );
 
   // add to database
-  database.expressions.push(hamTeaExpression);
-  database.answerExpressions.push(hamExpression, teaExpression);
-  database.recommendations.push(hamTeaRecommendation);
+  database.expressions.push(wheelchairExpression);
+  database.answerExpressions.push(manualExpression,motorExpression);
+  database.benefits.push(pip);
 
   // Cheese or Salt
   let cheeseSaltExpression = new Expression();
-  cheeseExpression = new AnswerExpression(cheese.id, cheeseSaltExpression.id);
-  let saltExpression = new AnswerExpression(salt.id, cheeseSaltExpression.id);
-  let cheeseSaltBenefit = new Benefit(
-    (text = 'At least you are getting your dairy or your salt!'),
-    (subCategoryId = subCat21),
+  afraidOfWalkingExpression = new AnswerExpression(afraidWalking.id, cheeseSaltExpression.id);
+  let saltExpression = new AnswerExpression(noWheelchair.id, cheeseSaltExpression.id);
+  let cheeseSaltBenefit = new Recommendation(
+    'Motor car',
+    subCat21.id,
   );
 
   // add to database
   database.expressions.push(cheeseSaltExpression);
-  database.answerExpressions.push(cheeseExpression, saltExpression);
+  database.answerExpressions.push(afraidOfWalkingExpression, saltExpression);
   database.recommendations.push(cheeseSaltBenefit);
 
   return database;

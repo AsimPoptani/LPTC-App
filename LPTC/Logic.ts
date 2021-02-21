@@ -1,12 +1,12 @@
-import {AnswerExpression} from './models/AnswerExpression';
-import {Benefit} from './models/Benefit';
-import {Expression} from './models/Expression';
-import {ExpressionExpression} from './models/ExpressionExpression';
-import {Question} from './models/Question';
-import {Recommendation} from './models/Recommendation';
-import {Answer} from './models/Answer';
-import {SubCategory} from './models/SubCategory';
-import {Category} from './models/Category';
+import { AnswerExpression } from './models/AnswerExpression';
+import { Benefit } from './models/Benefit';
+import { Expression } from './models/Expression';
+import { ExpressionExpression } from './models/ExpressionExpression';
+import { Question } from './models/Question';
+import { Recommendation } from './models/Recommendation';
+import { Answer } from './models/Answer';
+import { SubCategory } from './models/SubCategory';
+import { Category } from './models/Category';
 
 interface Dictionary<T> {
   [key: string]: T;
@@ -15,7 +15,6 @@ function findAllUnansweredQuestions(
   database: Dictionary<any>,
 ): Array<Question> {
   let questions: Array<Question> = database.questions;
-
   return questions.filter((question) => question.answered);
 }
 
@@ -66,6 +65,7 @@ function expressionCheck(
     database.expressionExpressions;
   let answerExpressions: Array<AnswerExpression> = database.answerExpressions;
   let answers: Array<Answer> = database.answers;
+  let questions: Array<Question> = database.questions;
 
   expressionExpressions = expressionExpressions.filter(
     (expressionExpression) =>
@@ -100,7 +100,10 @@ function expressionCheck(
       let answer = answers.find(
         (answer) => answerExpression.answerId == answer.id,
       );
-      if (!answer.state) {
+      // Find question check question if skipped
+      const question = questions.find((question) => answer.questionId == question.id)
+
+      if (!answer.state && !question.skipped) {
         return false;
       }
     }
@@ -113,7 +116,10 @@ function expressionCheck(
       let answer = answers.find(
         (answer) => answerExpression.answerId == answer.id,
       );
-      if (answer.state) {
+      // Find question check question if skipped
+      const question = questions.find((question) => answer.questionId == question.id)
+
+      if (answer.state || question.skipped) {
         return true;
       }
     }
@@ -171,9 +177,30 @@ function findAllUnansweredQuestionsExpressionsFulfilled(
   return questionsExpressionsFulfilled;
 }
 
+function findAllBenefitsBySubCategoryId(
+  database: Dictionary<any>,
+  subCategoryId: string
+): Array<Benefit> {
+  let benefits: Array<Benefit> = database.benefits;
+  console.log(benefits)
+  console.log(subCategoryId)
+  return benefits.filter((benefit) => benefit.subCategoryId == subCategoryId)
+}
+
+function findAllRecommendationsBySubCategoryId(
+  database: Dictionary<any>,
+  subCategoryId: string
+): Array<Benefit> {
+  let recommendations: Array<Recommendation> = database.recommendations;
+  // console.log(recommendations)
+  return recommendations.filter((recommendation) => recommendation.subCategoryId == subCategoryId)
+}
+
 export {
+  findAllBenefitsBySubCategoryId,
+  findAllRecommendationsBySubCategoryId,
   findCategoryById,
-  findAllSubCategoriesByCategoryId as findAllSubCategoriesByCategory,
+  findAllSubCategoriesByCategoryId,
   findAllUnansweredQuestions,
   findAllQuestionsExpressionsFulfilled,
   expressionCheck,
