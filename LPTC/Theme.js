@@ -1,16 +1,22 @@
 export default theme = {
   Text: {},
   colors: {
-    // primary: 'red',
+    primary: '#000000',
+    secondary: '#FFFFFF',
+    tertiary: '#EFCEF5',
+    quaternary: '#97DFAF',
+    quinary: '#398D55'
+
+
   },
   Button: {
     disabled: false,
     titleStyle: {
-      color: 'black',
+      // color: 'black',
       fontSize: 15,
     },
     buttonStyle: {
-      borderColor: 'black',
+      // borderColor: 'black',
     },
     containerStyle: {
       marginVertical: 2,
@@ -22,8 +28,5 @@ export default theme = {
   Image: {
     resizeMode: 'center',
   },
-  Avatar: {
-    size: 'large',
-    activeOpacity: 0.7,
-  },
+
 };

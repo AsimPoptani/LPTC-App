@@ -14,7 +14,7 @@ export default function Splashscreen() {
   const [dataState, dataActions] = useData();
   const [loading, setLoading] = useState();
 
-  let transitionTime = 3000;
+  let transitionTime = 1000;
   useEffect(() => {
 
     (async () => {

@@ -35,6 +35,7 @@ let Navigation = () => {
             open: config,
             close: config,
           },
+          headerShown: false
         }}>
         <stack.Screen
           name="Splashscreen"
@@ -44,7 +45,6 @@ let Navigation = () => {
         {/* <stack.Screen name="Profile" options={{ headerShown: false }} component={Profile} /> */}
         <stack.Screen
           name="MenuScreen"
-          options={{ headerShown: false }}
           component={MenuScreen}
         />
         <stack.Screen
@@ -54,12 +54,12 @@ let Navigation = () => {
         />
         <stack.Screen
           name="SubCategoryScreen"
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
           component={SubCategoryScreen}
         />
         <stack.Screen
         name="MoreInfoScreen"
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
           component={MoreInfoScreen}
         />
       </stack.Navigator>

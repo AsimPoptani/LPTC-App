@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, View } from 'react-native'
 import { Text } from 'react-native-elements'
 import { FlatList } from 'react-native-gesture-handler'
 import bootstrap from '../Bootstrap'
+
+import Header from '../components/projectDependant/Header'
 import { useData } from '../Data'
 import { findAllRecommendationsBySubCategoryId, findAllBenefitsBySubCategoryId } from '../Logic'
 export default function MoreInfoScreen({ route, navigation }) {
@@ -13,8 +15,7 @@ export default function MoreInfoScreen({ route, navigation }) {
     useEffect(() => {
         setLoading(true)
         const subCategoryId = route.params.id
-        // dataActions.setDatabase(bootstrap())
-        // dataActions.save()
+
         setBenefits(findAllBenefitsBySubCategoryId(dataState.database, subCategoryId))
         setRecommendations(findAllRecommendationsBySubCategoryId(dataState.database, subCategoryId))
         setLoading(false)
@@ -28,10 +29,13 @@ export default function MoreInfoScreen({ route, navigation }) {
     } else {
         return (
             <SafeAreaView>
-                <Text h4 >Recommendations</Text>
-                <FlatList data={recommendations} keyExtractor={(item) => { return item.id }} renderItem={({ item }) => <Text>{item.text}</Text>} />
-                <Text h4 >Benefits</Text>
-                <FlatList data={benefits} keyExtractor={(item) => { return item.id }} renderItem={({ item }) => <Text>{item.text}</Text>} />
+                <Header goBack />
+                <View style={{margin:15}}>
+                    <Text h3 >Recommendations</Text>
+                    <FlatList data={recommendations} keyExtractor={(item) => { return item.id }} renderItem={({ item }) => <Text>{item.text}</Text>} />
+                    <Text h3 >Benefits</Text>
+                    <FlatList data={benefits} keyExtractor={(item) => { return item.id }} renderItem={({ item }) => <Text>{item.text}</Text>} />
+                </View>
             </SafeAreaView>
         )
     }
