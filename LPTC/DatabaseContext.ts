@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 let database = {
-  categories: [],
+  categories:  [],
   answers: [],
   questions: [],
   answerExpressions: [],
@@ -20,5 +20,7 @@ const DatabaseContext = React.createContext({
   retrieve: async () => {},
   clear: async () => {},
 });
+
+
 
 export {DatabaseContext};
